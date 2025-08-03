@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    const handleUserJoined = (data: any) => {
+    const handleUserJoined = (_data: unknown) => {
       console.log("User joined: hello");
     };
     socket.on("user_joined", handleUserJoined);
