@@ -33,7 +33,9 @@ app.prepare().then(() => {
         type: "join",
       });
     });
-
+    socket.on("send_message", ({ room, message, sender }) => {
+      io.to(room).emit("send_message", { message, sender });
+    });
     socket.on("increment", () => {
       count = count + 1;
       console.log("count ", count);

@@ -27,10 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "server.js"
+    "server.mts"
   ],
   "exclude": ["node_modules"],
-  "ts-node": {
-    "esm": true
-  }
+  
 }
