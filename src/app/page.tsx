@@ -13,18 +13,27 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+type SystemMessage = {
+  message: string;
+  timeStamp: Date;
+  type: string;
+};
 export default function Home() {
-  const [joined, setJoined] = useState(false);
-  const [username, setUsername] = useState("");
-  const [room, setRoom] = useState<Number>();
-  const [systemMessages, setSystemMessages] = useState([]);
+  const [joined, setJoined] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>("");
+  const [room, setRoom] = useState<string | undefined>(undefined);
+  const [systemMessages, setSystemMessages] = useState<SystemMessage[]>([]);
   useEffect(() => {
     const handleUserJoined = (_data: unknown) => {
       console.log("User joined: hello");
     };
     socket.on("user_joined", handleUserJoined);
 
-    const handleSystemMessage = (data) => {
+    const handleSystemMessage = (data: {
+      message: string;
+      timeStamp: Date;
+      type: string;
+    }) => {
       console.log("System message:", data);
       setSystemMessages((prev) => [...prev, data]);
     };
@@ -66,7 +75,7 @@ export default function Home() {
                   id="room"
                   type="text"
                   required
-                  value={room}
+                  value={room ?? ""}
                   onChange={(e) => setRoom(e.target.value)}
                 />
               </div>
@@ -97,7 +106,9 @@ export default function Home() {
           <div className="space-y-2">
             {systemMessages.map((msg, index) => (
               <div key={index} className="text-gray-300 text-sm">
-                <span className="text-blue-400">[{msg.timestamp}]</span>{" "}
+                <span className="text-blue-400">
+                  [{msg.timeStamp.toLocaleString()}]
+                </span>{" "}
                 <span className="text-yellow-300">System:</span> {msg.message}
               </div>
             ))}
