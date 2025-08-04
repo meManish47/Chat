@@ -1,6 +1,7 @@
 import { createServer } from "node:http";
 import next from "next";
 import { Server } from "socket.io";
+import { timeStamp } from "node:console";
 
 console.log("🟢 Starting server setup..."); // Add this
 
@@ -15,7 +16,7 @@ app.prepare().then(() => {
   const httpServer = createServer(handler);
   const io = new Server(httpServer, {
     cors: {
-      origin: "*", // ✅ or restrict to your actual frontend domain later
+      origin: "*",
       methods: ["GET", "POST"],
     },
   });
@@ -26,8 +27,13 @@ app.prepare().then(() => {
     socket.on("join_room", ({ room, username }) => {
       console.log(`User ${username} joining ${room}`);
       socket.join(room);
-      socket.to(room).emit("user_joined");
+      io.to(room).emit("system_message", {
+        message: `${username} joined`,
+        timeStamp: new Date().toLocaleDateString(),
+        type: "join",
+      });
     });
+
     socket.on("increment", () => {
       count = count + 1;
       console.log("count ", count);
