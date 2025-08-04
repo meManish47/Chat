@@ -123,7 +123,7 @@ export default function Home() {
                 return (
                   <div
                     key={i}
-                    className="bg-[#1755ac] rounded p-2 flex flex-col w-40 h-16 mb-2"
+                    className="bg-[#1755ac] rounded p-2 flex flex-col min-w-40 h-max mb-2"
                   >
                     <div className="text-sm text-gray-400">{msg.sender}</div>
                     <div className="p-1 text-base text-white">
