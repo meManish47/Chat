@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "dev:socket": "node --loader ts-node/esm server.mts",
     "build": "next build",
-    "start": "next start",
+    "start": "node server.mts",
     "lint": "next lint"
   },
   "dependencies": {
