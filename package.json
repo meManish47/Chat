@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "dev:socket": "node --loader ts-node/esm server.mts",
+    "dev:socket": "node --loader ts-node/esm server.js",
     "build": "next build",
-    "start": "node server.mts",
+    "start": "node server.js",
     "lint": "next lint"
   },
   "dependencies": {
