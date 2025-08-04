@@ -67,6 +67,7 @@ export default function Home() {
   }
   function handleSend() {
     socket.emit("send_message", { room, message: text, sender: username });
+    setText("");
   }
   return (
     <div className="h-screen w-full flex justify-center items-center bg-[#161616]">
