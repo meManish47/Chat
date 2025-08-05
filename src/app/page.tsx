@@ -124,10 +124,14 @@ export default function Home() {
                 return (
                   <div
                     key={i}
-                    className="bg-[#1755ac] rounded p-2 flex flex-col min-w-40 h-max mb-2"
+                    className={`bg-[#1755ac] rounded p-2 flex flex-col w-max h-max mb-2 max-w-[70%]
+                      ${msg.sender === username ? "self-end" : "self-start"}
+                      `}
                   >
-                    <div className="text-sm text-gray-400">{msg.sender}</div>
-                    <div className="p-1 text-base text-white">
+                    <div className="text-sm text-gray-400">
+                      {msg.sender === username ? "You" : msg.sender}
+                    </div>
+                    <div className="p-1 text-base text-white flex flex-wrap">
                       {msg.message}
                     </div>
                   </div>
